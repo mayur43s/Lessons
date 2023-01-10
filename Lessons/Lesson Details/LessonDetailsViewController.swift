@@ -26,7 +26,7 @@ struct LessonDetailView: UIViewControllerRepresentable {
 
 final class LessonDetailsViewController: UIViewController {
     
-    var lesson: VideoLesson? = nil
+    var lesson: VideoLesson?
     
     let containerView = LessonDetailsUIView()
     let downloadManager = DownloadManager()
@@ -51,6 +51,12 @@ final class LessonDetailsViewController: UIViewController {
         containerView.setLessonDetails(lesson: lesson)
         containerView.playButtonCallback = {
             self.playViedo()
+        }
+        containerView.previousButtonCallback = {
+            self.goToPreviousLessson()
+        }
+        containerView.nextButtonCallback = {
+            self.goToNextLessson()
         }
         setupProgressHUD()
     }
@@ -78,7 +84,14 @@ final class LessonDetailsViewController: UIViewController {
         }
         
         if !downloadManager.checkFileExists(videoUrl: videoUrl) {
-            let rightBarButton = UIBarButtonItem(image: UIImage.init(systemName: "icloud.and.arrow.down"), style: .plain, target: self, action: #selector(downloadVideo))
+            let button = UIButton(type: .system)
+            button.setTitle("Download", for: .normal)
+            button.setImage(UIImage.init(systemName: "icloud.and.arrow.down"), for: .normal)
+            button.addTarget(self, action: #selector(downloadVideo), for: .touchUpInside)
+            var titleEdgeInsets = button.titleEdgeInsets
+            titleEdgeInsets.right = -10
+            button.titleEdgeInsets = titleEdgeInsets
+            let rightBarButton = UIBarButtonItem(customView: button)
             parent?.navigationItem.rightBarButtonItem = rightBarButton
         } else {
             hideDownloadButton()
@@ -128,5 +141,41 @@ final class LessonDetailsViewController: UIViewController {
         present(avPlayerVC, animated: true) {
             avPlayerVC.player?.play()
         }
+    }
+    
+    private func goToPreviousLessson() {
+        let databaseManager = DatabaseManager.shared
+        let lessons = databaseManager.fetch(VideoLesson.self)
+
+        for (index, lessonData) in lessons.enumerated() {
+            if lesson?.id == lessonData.id {
+                var previousIndex = index - 1
+                if previousIndex <= 0 {
+                    previousIndex = lessons.count - 1
+                }
+                lesson = lessons[previousIndex]
+                break
+            }
+        }
+        containerView.setLessonDetails(lesson: lesson)
+        showDowloadButtonIfNeeded()
+    }
+    
+    private func goToNextLessson() {
+        let databaseManager = DatabaseManager.shared
+        let lessons = databaseManager.fetch(VideoLesson.self)
+        
+        for (index, lessonData) in lessons.enumerated() {
+            if lesson?.id == lessonData.id {
+                var nextIndex = index + 1
+                if nextIndex >= lessons.count {
+                    nextIndex = 0
+                }
+                lesson = lessons[nextIndex]
+                break
+            }
+        }
+        containerView.setLessonDetails(lesson: lesson)
+        showDowloadButtonIfNeeded()
     }
 }

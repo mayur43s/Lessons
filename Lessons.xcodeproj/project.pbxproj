@@ -64,6 +64,7 @@
 		18804C69296D6CE300D091DC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				18804C6E296D870C00D091DC /* DatabaseManager.swift */,
 				18804C67296C433800D091DC /* DownloadManager.swift */,
 			);
 			path = Util;
@@ -72,7 +73,6 @@
 		18804C6A296D866800D091DC /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				18804C6E296D870C00D091DC /* DatabaseManager.swift */,
 				18804C7B296D8FF700D091DC /* VideoLesson+CoreDataClass.swift */,
 				18804C7C296D8FF700D091DC /* VideoLesson+CoreDataProperties.swift */,
 				18804C74296D8E9800D091DC /* VideoLessons.xcdatamodeld */,
