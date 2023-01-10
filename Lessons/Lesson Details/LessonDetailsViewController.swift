@@ -7,8 +7,8 @@
 
 import UIKit
 import SwiftUI
-import Combine
 import ProgressHUD
+import AVKit
 
 struct LessonDetailView: UIViewControllerRepresentable {
     typealias UIViewControllerType = LessonDetailsViewController
@@ -35,25 +35,24 @@ final class LessonDetailsViewController: UIViewController {
         self.lesson = lesson
         super.init(nibName: nil, bundle: nil)
     }
-    
-    override func loadView() {
-        view = containerView
-    }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: View Life Cycle
+    override func loadView() {
+        view = containerView
+    }
+
+    //MARK: View Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         containerView.setLessonDetails(lesson: lesson)
-        
-        ProgressHUD.colorProgress = .systemBlue
-        ProgressHUD.colorHUD = .systemGray6
-        ProgressHUD.colorStatus = .systemBlue
-
+        containerView.playButtonCallback = {
+            self.playViedo()
+        }
+        setupProgressHUD()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +63,13 @@ final class LessonDetailsViewController: UIViewController {
             self.parent?.navigationItem.largeTitleDisplayMode = .never
             self.showDowloadButtonIfNeeded()
         }
+    }
+    
+    //MARK: Private Helpers -
+    private func setupProgressHUD() {
+        ProgressHUD.colorProgress = .systemBlue
+        ProgressHUD.colorHUD = .systemGray6
+        ProgressHUD.colorStatus = .systemBlue
     }
     
     private func showDowloadButtonIfNeeded() {
@@ -98,4 +104,29 @@ final class LessonDetailsViewController: UIViewController {
         })
     }
     
+    private func playViedo() {
+        guard let videoUrl = self.lesson?.videoUrl else  {
+            return
+        }
+        
+        var player: AVPlayer? {
+            if downloadManager.checkFileExists(videoUrl: videoUrl) {
+                let url = downloadManager.getFileUrlWith(videoUrl: videoUrl)
+                let asset = AVAsset(url: url)
+                return AVPlayer(playerItem: AVPlayerItem(asset: asset))
+                
+            } else {
+                if let videoURL = URL(string: videoUrl) {
+                    return AVPlayer(url: videoURL)
+                }
+            }
+            return nil
+        }
+        
+        let avPlayerVC = AVPlayerViewController()
+        avPlayerVC.player = player
+        present(avPlayerVC, animated: true) {
+            avPlayerVC.player?.play()
+        }
+    }
 }

@@ -28,9 +28,7 @@ final class DownloadManager: NSObject {
         } else {
             let urlRequest = URLRequest(url: URL(string: videoUrl)!)
             
-            let configuration = URLSessionConfiguration.default
-            let operationQueue = OperationQueue()
-            let session = URLSession(configuration: configuration, delegate: self, delegateQueue: operationQueue)
+            let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
             
             dataTask = session.downloadTask(with: urlRequest)
             dataTask?.resume()
@@ -63,7 +61,7 @@ final class DownloadManager: NSObject {
         return paths[0]
     }
     
-    private func getFileUrlWith(videoUrl: String) -> URL {
+    func getFileUrlWith(videoUrl: String) -> URL {
         let fileName = videoUrl.components(separatedBy: "/").last ?? ""
         let docsUrl = getDocumentsDirectoryFolder()
         return docsUrl.appendingPathComponent(fileName)

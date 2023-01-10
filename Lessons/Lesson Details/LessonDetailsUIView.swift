@@ -20,11 +20,11 @@ final class LessonDetailsUIView: UIView {
     }()
     
     let playButton: UIButton = {
-        let view = UIButton(type: .system)
-        view.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        view.contentMode = .scaleAspectFill
-        view.tintColor = .white
-        return view
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.contentMode = .scaleAspectFill
+        button.tintColor = .white
+        return button
     }()
     
     let titleLabel: UILabel = {
@@ -43,6 +43,8 @@ final class LessonDetailsUIView: UIView {
         return label
     }()
         
+    var playButtonCallback: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         createInitialUI()
@@ -62,6 +64,7 @@ final class LessonDetailsUIView: UIView {
         
         //playButton
         addSubview(playButton)
+        playButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
         playButton.snp.makeConstraints { make in
             make.center.equalTo(previewImageView.snp.center)
             make.width.height.equalTo(50)
@@ -91,5 +94,11 @@ final class LessonDetailsUIView: UIView {
         titleLabel.text = lesson.name
         bodyLabel.text = lesson.description
         previewImageView.kf.setImage(with: URL(string: lesson.thumbnail))
+    }
+    
+    //MARK: Actions -
+    
+    @objc func playButtonAction() {
+        playButtonCallback?()
     }
 }

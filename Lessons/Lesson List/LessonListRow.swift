@@ -23,11 +23,7 @@ struct LessonListRow: View {
                 .frame(width: 100, height: 56)
                 .cornerRadius(5)
                         
-            Text(lesson.name)
-            
-//            Spacer()
-//
-//            Image(systemName: "chevron.right")
+            Text(lesson.name)            
         }
         .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
     }
