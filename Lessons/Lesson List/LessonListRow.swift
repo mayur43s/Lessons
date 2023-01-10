@@ -10,7 +10,7 @@ import Kingfisher
 
 struct LessonListRow: View {
     
-    let lesson: Lesson
+    let lesson: VideoLesson
 
     var body: some View {
         HStack(spacing: 10) {

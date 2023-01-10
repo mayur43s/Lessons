@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		18804C68296C433800D091DC /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18804C67296C433800D091DC /* DownloadManager.swift */; };
+		18804C6F296D870C00D091DC /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18804C6E296D870C00D091DC /* DatabaseManager.swift */; };
+		18804C7D296D8FF700D091DC /* VideoLesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18804C7B296D8FF700D091DC /* VideoLesson+CoreDataClass.swift */; };
+		18804C7E296D8FF700D091DC /* VideoLesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18804C7C296D8FF700D091DC /* VideoLesson+CoreDataProperties.swift */; };
+		18804C7F296D907A00D091DC /* VideoLessons.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 18804C74296D8E9800D091DC /* VideoLessons.xcdatamodeld */; };
 		1893D67E296960DB006493CA /* LessonsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1893D67D296960DB006493CA /* LessonsApp.swift */; };
 		1893D682296960DD006493CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1893D681296960DD006493CA /* Assets.xcassets */; };
 		1893D685296960DD006493CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1893D684296960DD006493CA /* Preview Assets.xcassets */; };
@@ -24,6 +28,10 @@
 
 /* Begin PBXFileReference section */
 		18804C67296C433800D091DC /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		18804C6E296D870C00D091DC /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		18804C75296D8E9800D091DC /* VideoLessons.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoLessons.xcdatamodel; sourceTree = "<group>"; };
+		18804C7B296D8FF700D091DC /* VideoLesson+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoLesson+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18804C7C296D8FF700D091DC /* VideoLesson+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoLesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1893D67A296960DB006493CA /* Lessons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lessons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1893D67D296960DB006493CA /* LessonsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsApp.swift; sourceTree = "<group>"; };
 		1893D681296960DD006493CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +69,17 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		18804C6A296D866800D091DC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				18804C6E296D870C00D091DC /* DatabaseManager.swift */,
+				18804C7B296D8FF700D091DC /* VideoLesson+CoreDataClass.swift */,
+				18804C7C296D8FF700D091DC /* VideoLesson+CoreDataProperties.swift */,
+				18804C74296D8E9800D091DC /* VideoLessons.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		1893D671296960DB006493CA = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				1893D67D296960DB006493CA /* LessonsApp.swift */,
+				18804C6A296D866800D091DC /* CoreData */,
 				18804C69296D6CE300D091DC /* Util */,
 				189C35F42969925300562284 /* Networking */,
 				189C35FB2969992E00562284 /* Models */,
@@ -215,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18804C7F296D907A00D091DC /* VideoLessons.xcdatamodeld in Resources */,
 				1893D685296960DD006493CA /* Preview Assets.xcassets in Resources */,
 				1893D682296960DD006493CA /* Assets.xcassets in Resources */,
 			);
@@ -270,15 +291,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				189C35F129698E0600562284 /* LessonListRow.swift in Sources */,
+				18804C7D296D8FF700D091DC /* VideoLesson+CoreDataClass.swift in Sources */,
 				18804C68296C433800D091DC /* DownloadManager.swift in Sources */,
 				189C35F32969920200562284 /* LessonsModel.swift in Sources */,
 				189C35F62969927500562284 /* NetworkManager.swift in Sources */,
 				189C36002969C9F600562284 /* LessonDetailsUIView.swift in Sources */,
 				189C35EE29698AAD00562284 /* LessonListView.swift in Sources */,
 				1893D67E296960DB006493CA /* LessonsApp.swift in Sources */,
+				18804C6F296D870C00D091DC /* DatabaseManager.swift in Sources */,
 				189C35FA2969992700562284 /* LessonsViewModel.swift in Sources */,
 				189C35F8296995C300562284 /* CustomError.swift in Sources */,
 				189C35FE2969C85400562284 /* LessonDetailsViewController.swift in Sources */,
+				18804C7E296D8FF700D091DC /* VideoLesson+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +513,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18804C74296D8E9800D091DC /* VideoLessons.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18804C75296D8E9800D091DC /* VideoLessons.xcdatamodel */,
+			);
+			currentVersion = 18804C75296D8E9800D091DC /* VideoLessons.xcdatamodel */;
+			path = VideoLessons.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1893D672296960DB006493CA /* Project object */;
 }

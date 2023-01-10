@@ -87,12 +87,12 @@ final class LessonDetailsUIView: UIView {
         }
     }
     
-    func setLessonDetails(lesson: Lesson?) {
+    func setLessonDetails(lesson: VideoLesson?) {
         guard let lesson = lesson else {
             return
         }
         titleLabel.text = lesson.name
-        bodyLabel.text = lesson.description
+        bodyLabel.text = lesson.details
         previewImageView.kf.setImage(with: URL(string: lesson.thumbnail))
     }
     

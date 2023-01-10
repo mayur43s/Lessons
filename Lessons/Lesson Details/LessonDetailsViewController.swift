@@ -13,7 +13,7 @@ import AVKit
 struct LessonDetailView: UIViewControllerRepresentable {
     typealias UIViewControllerType = LessonDetailsViewController
     
-    let lesson: Lesson
+    let lesson: VideoLesson
     
     func makeUIViewController(context: Context) -> LessonDetailsViewController {
         return LessonDetailsViewController(lesson: lesson)
@@ -26,12 +26,12 @@ struct LessonDetailView: UIViewControllerRepresentable {
 
 final class LessonDetailsViewController: UIViewController {
     
-    var lesson: Lesson? = nil
+    var lesson: VideoLesson? = nil
     
     let containerView = LessonDetailsUIView()
     let downloadManager = DownloadManager()
 
-    init(lesson: Lesson) {
+    init(lesson: VideoLesson) {
         self.lesson = lesson
         super.init(nibName: nil, bundle: nil)
     }
